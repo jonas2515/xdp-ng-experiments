@@ -1,0 +1,24 @@
+[package]
+name = "xdp-ng"
+version = "0.1.0"
+edition = "2024"
+
+[[bin]]
+name = "dynamic_launcher"
+path = "src/dynamic_launcher/main.rs"
+
+[dependencies]
+anyhow = "1.0.101"
+command-fds = "0.3.3"
+gtk4 = "0.11.3"
+listen-fds = "0.1.0"
+memfd = "0.6.5"
+serde = "1.0.228"
+tokio = { version = "1.52.2", features = ["full"] }
+serde_json = "1.0.150"
+uuid = { version = "1", features = ["v4"] }
+zlink = "0.5.0"
+gxdp = { path = "../gxdp-rs" }
+gio-unix = "0.22.6"
+futures = "0.3.32"
+async-stream = "0.3.6"
