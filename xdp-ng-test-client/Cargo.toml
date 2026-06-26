@@ -1,0 +1,23 @@
+[package]
+name = "xdg-np-test-client"
+version = "0.1.0"
+edition = "2024"
+
+[[bin]]
+name = "dynamic_launcher"
+path = "src/dynamic-launcher/main.rs"
+
+[[bin]]
+name = "xdp_ng_demo_app"
+path = "src/xdp-ng-demo-app/main.rs"
+
+[dependencies]
+anyhow = "1.0.102"
+futures = "0.3.32"
+futures-channel = "0.3.32"
+gdk4-wayland = "0.11.0"
+gtk4 = "0.11.3"
+serde = "1.0.228"
+serde_json = "1.0.150"
+tokio = { version = "1.52.3", features = ["full"] }
+zlink = "0.5.0"

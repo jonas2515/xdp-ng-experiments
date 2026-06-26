@@ -1,0 +1,35 @@
+app-id: com.example.XdpNgDynamicLauncher
+runtime: org.gnome.Platform
+runtime-version: '50'
+sdk: org.gnome.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.rust-stable
+
+command: dynamic_launcher
+
+finish-args:
+  - --device=dri
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --share=ipc
+  # Varlink socket of the new portal interface
+  - --filesystem=/tmp/xdp-ng-example.socket
+
+build-options:
+  append-path: /usr/lib/sdk/rust-stable/bin
+  env:
+    CARGO_HOME: /run/build/xdg-np-test-client/cargo
+    CARGO_NET_OFFLINE: 'true'
+
+modules:
+  - name: xdg-np-test-client
+    buildsystem: simple
+    build-commands:
+      - cargo --offline fetch --manifest-path Cargo.toml --verbose
+      - cargo --offline build --release --all-features
+      - install -Dm755 target/release/dynamic_launcher /app/bin/dynamic_launcher
+      - install -Dm755 target/release/xdp_ng_demo_app /app/bin/xdp_ng_demo_app
+    sources:
+      - type: dir
+        path: .
+      - cargo-sources.json
